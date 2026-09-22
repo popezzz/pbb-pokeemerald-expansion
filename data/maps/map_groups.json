@@ -75,7 +75,8 @@
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
     "gMapGroup_IndoorSevenIslandRoute_Frlg",
-    "gMapGroup_Roria_TownsAndRoutes"
+    "gMapGroup_Roria_TownsAndRoutes",
+    "gMapGroup_Roria_IndoorMitis"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -141,7 +142,8 @@
     "LittlerootTown_BrendansHouse_2F",
     "LittlerootTown_MaysHouse_1F",
     "LittlerootTown_MaysHouse_2F",
-    "LittlerootTown_ProfessorBirchsLab"
+    "LittlerootTown_ProfessorBirchsLab",
+    "MitisTown_PlayersHouse_1F"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",
@@ -1164,5 +1166,8 @@
   ],
   "gMapGroup_Roria_TownsAndRoutes": [
     "MitisTown"
+  ],
+  "gMapGroup_Roria_IndoorMitis": [
+    "MitisTown_PlayersHouse_2F"
   ]
 }

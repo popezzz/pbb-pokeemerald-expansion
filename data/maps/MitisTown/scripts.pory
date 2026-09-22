@@ -1,0 +1,71 @@
+raw `
+MitisTown_MapScripts::
+	.byte 0
+
+`
+
+script MitisTown_EventScript_TownSign {
+    lockall
+    msgbox(MitisTownSign)
+    releaseall
+}
+
+script MitisTown_EventScript_PlayersHouseSign {
+    lockall
+    msgbox("{PLAYER}'s House.")
+    releaseall
+}
+
+script MitisTown_EventScript_RivalsHouseSign {
+    lockall
+    msgbox("Jake's House.")
+    releaseall
+}
+
+script MitisTown_EventScript_LabSign {
+    lockall
+    msgbox("Roria Pokémon research lab.")
+    releaseall
+}
+
+script MitisTown_EventScript_DiggingSiteSign {
+    lockall
+    msgbox("Mitis Town Digging Site.\pNote: those ledges are supposed\nto be stairs...")
+    releaseall
+}
+
+script MitisTown_Trigger_BlockPath {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, FaceRight)
+    waitmovement(0)
+    msgbox("You don't have a Pokémon yet, right?\nYou should go to the lab first.", MSGBOX_AUTOCLOSE)
+    applymovement(OBJ_EVENT_ID_PLAYER, WalkUp)
+    waitmovement(0)
+    releaseall
+}
+
+text MitisTownSign {
+    "Mitis Town.\n"
+    "The fresh breeze of a new start."
+}
+
+movement FaceRight {
+    face_right
+}
+
+movement WalkUp {
+    walk_up
+}
+
+movement Jake_Intro_ToPlayer {
+    walk_down * 6
+    face_right
+    walk_right * 4
+}
+
+movement Jake_Intro_ToLab {
+    face_left
+    walk_left * 4
+    face_up
+    walk_up * 6
+}

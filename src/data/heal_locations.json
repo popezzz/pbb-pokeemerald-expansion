@@ -355,6 +355,12 @@
       "map": "MAP_PETALBURG_CITY",
       "x": 15,
       "y": 15
+    },
+    {
+      "id": "HEAL_LOCATION_MITIS_TOWN",
+      "map": "MAP_MITIS_TOWN",
+      "x": 35,
+      "y": 34
     }
   ]
 }

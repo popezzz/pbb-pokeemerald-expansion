@@ -1740,3 +1740,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/wild_encounter.inc"
 
 	.include "data/maps/MitisTown/scripts.inc"
+
+	.include "data/maps/MitisTown_PlayersHouse_2F/scripts.inc"
+
+	.include "data/maps/MitisTown_PlayersHouse_1F/scripts.inc"
