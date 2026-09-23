@@ -17,16 +17,26 @@ script MitisTown_PlayersHouse_2F_IntroScript {
     applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_JumpDown)
     waitmovement(0)
     msgbox(PlayersHouse_NewAdventure)
+    
     applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_FaceRight)
     waitmovement(0)
     msgbox(PlayersHouse_FillTrainerCard)
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToTable)
     waitmovement(0)
+    fadescreen(FADE_TO_BLACK)
+    special(NamePlayer)
+    waitstate
+    delay(30)
+    
     msgbox(PlayersHouse_SetClock)
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToClock)
     waitmovement(0)
+    call(MitisTown_PlayersHouse_2F_EventScript_SetWallClock)
+    delay(30)
+    setflag(FLAG_SET_WALL_CLOCK)
+
     msgbox(PlayersHouse_GoodToGo)
     setvar(VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1)
     releaseall
@@ -76,3 +86,14 @@ text PlayersHouse_GoodToGo {
     "...Perfect! I'm good to go."
 }
 
+script MitisTown_PlayersHouse_2F_EventScript_SetWallClock {
+    fadescreen(FADE_TO_BLACK)
+    special(StartWallClock)
+    return
+}
+
+script MitisTown_PlayersHouse_2F_EventScript_UseWallClock {
+    fadescreen(FADE_TO_BLACK)
+    special(Special_ViewWallClock)
+    releaseall
+}

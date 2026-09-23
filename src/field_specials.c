@@ -5766,3 +5766,8 @@ bool8 CheckAddCoins(void)
     else
         return TRUE;
 }
+
+void NamePlayer(void)
+{
+    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+}

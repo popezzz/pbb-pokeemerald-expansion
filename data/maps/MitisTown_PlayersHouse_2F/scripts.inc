@@ -34,98 +34,130 @@ MitisTown_PlayersHouse_2F_IntroScript::
 	waitmovement 0
 # 19 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	msgbox PlayersHouse_NewAdventure
-# 20 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_FaceRight
 # 21 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_FaceRight
 # 22 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	msgbox PlayersHouse_FillTrainerCard
+	waitmovement 0
 # 23 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	closemessage
+	msgbox PlayersHouse_FillTrainerCard
 # 24 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToTable
-# 25 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	waitmovement 0
-# 26 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	msgbox PlayersHouse_SetClock
-# 27 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	closemessage
-# 28 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToClock
-# 29 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 25 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToTable
+# 26 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	waitmovement 0
+# 27 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 28 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	special NamePlayer
+# 29 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	waitstate
 # 30 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	msgbox PlayersHouse_GoodToGo
-# 31 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
-	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1
+	delay 30
 # 32 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	msgbox PlayersHouse_SetClock
+# 33 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	closemessage
+# 34 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToClock
+# 35 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	waitmovement 0
+# 36 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	call MitisTown_PlayersHouse_2F_EventScript_SetWallClock
+# 37 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	delay 30
+# 38 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	setflag FLAG_SET_WALL_CLOCK
+# 40 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	msgbox PlayersHouse_GoodToGo
+# 41 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1
+# 42 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	releaseall
 	return
 
 
-# 35 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 45 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 PlayersHouse_FaceRight:
-# 36 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 46 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	face_right
 	step_end
 
-# 39 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 49 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 PlayersHouse_HeadToTable:
-# 40 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 50 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_right
-# 40 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 50 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_right
-# 40 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 50 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_right
-# 41 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 51 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	face_up
-# 42 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 52 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_up
 	step_end
 
-# 45 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 55 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 PlayersHouse_HeadToClock:
-# 46 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 56 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	face_left
-# 47 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 57 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_left
-# 47 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 57 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_left
-# 47 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 57 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_left
-# 47 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 57 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	walk_left
-# 48 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 58 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	face_up
 	step_end
 
-# 51 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 61 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 PlayersHouse_JumpDown:
-# 52 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 62 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	face_down
-# 53 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 63 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	jump_down
 	step_end
 
+MitisTown_PlayersHouse_2F_EventScript_SetWallClock::
+# 90 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 91 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	special StartWallClock
+	return
+
+
+MitisTown_PlayersHouse_2F_EventScript_UseWallClock::
+# 96 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 97 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	special Special_ViewWallClock
+# 98 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+	releaseall
+	return
+
+
 PlayersHouse_EnoughGames::
-# 56 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 66 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	.string "... Ugh! Enough video games for today.\p"
 	.string "After all...$"
 
 PlayersHouse_NewAdventure::
-# 61 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 71 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	.string "...I'll finally get my first Pokémon\n"
 	.string "Today!\p"
 	.string "I can't wait to start my own adventure!$"
 
 PlayersHouse_FillTrainerCard::
-# 67 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 77 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	.string "I just need to fill my trainer card...$"
 
 PlayersHouse_SetClock::
-# 71 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 81 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	.string "...I also need to set the clock...$"
 
 PlayersHouse_GoodToGo::
-# 75 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
+# 85 "data/maps/MitisTown_PlayersHouse_2F/scripts.pory"
 	.string "...Perfect! I'm good to go.$"
