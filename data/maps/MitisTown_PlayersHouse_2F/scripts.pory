@@ -1,5 +1,10 @@
 mapscripts MitisTown_PlayersHouse_2F_MapScripts {
-    
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 0 {
+            turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+        }
+    ]
+
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 0: MitisTown_PlayersHouse_2F_IntroScript
     ]
@@ -7,32 +12,67 @@ mapscripts MitisTown_PlayersHouse_2F_MapScripts {
 
 script MitisTown_PlayersHouse_2F_IntroScript {
     lockall
-    applymovement(OBJ_EVENT_ID_PLAYER, FaceUp)
+    msgbox(PlayersHouse_EnoughGames)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_JumpDown)
     waitmovement(0)
-    msgbox(EnoughGames)
-    applymovement(OBJ_EVENT_ID_PLAYER, JumpDown)
+    msgbox(PlayersHouse_NewAdventure)
+    applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_FaceRight)
     waitmovement(0)
-    msgbox(NewAdventure)
+    msgbox(PlayersHouse_FillTrainerCard)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToTable)
+    waitmovement(0)
+    msgbox(PlayersHouse_SetClock)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, PlayersHouse_HeadToClock)
+    waitmovement(0)
+    msgbox(PlayersHouse_GoodToGo)
     setvar(VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1)
     releaseall
 }
 
-movement FaceUp {
+movement PlayersHouse_FaceRight {
+    face_right
+}
+
+movement PlayersHouse_HeadToTable {
+    walk_right * 3
+    face_up
+    walk_up
+}
+
+movement PlayersHouse_HeadToClock {
+    face_left
+    walk_left * 4
     face_up
 }
 
-movement JumpDown {
+movement PlayersHouse_JumpDown {
   face_down
   jump_down
 }
 
-text EnoughGames {
-  "... Ugh! Enough Games for today.\n"
+text PlayersHouse_EnoughGames {
+  "... Ugh! Enough video games for today.\p"
   "After all..."
 }
 
-text NewAdventure {
+text PlayersHouse_NewAdventure {
     "...I'll finally get my first Pokémon\n"
-    "Today!\l"
+    "Today!\p"
     "I can't wait to start my own adventure!"
 }
+
+text PlayersHouse_FillTrainerCard {
+    "I just need to fill my trainer card..."
+}
+
+text PlayersHouse_SetClock {
+    "...I also need to set the clock..."
+}
+
+text PlayersHouse_GoodToGo {
+    "...Perfect! I'm good to go."
+}
+
