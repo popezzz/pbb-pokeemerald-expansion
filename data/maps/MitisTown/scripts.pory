@@ -33,26 +33,64 @@ script MitisTown_EventScript_LabSign {
     releaseall
 }
 
+script MitisTown_Trigger_Parents1 {
+  lockall
+  applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkToParents_1)
+  waitmovement(0)
+  goto(MitisTown_EventScript_Parents)
+}
+
+script MitisTown_Trigger_Parents2 {
+  lockall
+  applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkToParents_1)
+  waitmovement(0)
+  goto(MitisTown_EventScript_Parents)
+}
+
+script MitisTown_EventScript_Parents {
+  msgbox(MitisTown_ParentsDialogue1)
+  applymovement(MITIS_TOWN_ID_MOM, Mitis_ParentsSurprised)
+  applymovement(MITIS_TOWN_ID_DAD, Mitis_ParentsSurprised)
+  waitmovement(0)
+  
+  msgbox(MitisTown_ParentsDialogue2)
+  applymovement(MITIS_TOWN_ID_MOM, Mitis_MomWalkAway)
+  applymovement(MITIS_TOWN_ID_DAD, Mitis_DadWalkAway)
+  waitmovement(0)
+  removeobject(MITIS_TOWN_ID_MOM)
+  removeobject(MITIS_TOWN_ID_DAD)
+
+  msgbox(MitisTown_PlayerGetGoing)
+  applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkAway)
+  waitmovement(0)
+
+  setflag(FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE)
+  setvar(VAR_LITTLEROOT_TOWN_STATE, 2)
+
+  releaseall
+}
+
 script MitisTown_EventScript_JakeIntro {
     lockall
     msgbox("Hey {PLAYER}, it's me, Jake!")
     closemessage
 
-    addobject(LOCALID_JAKE_INTRO)
+    addobject(MITIS_TOWN_ID_JAKE_INTRO)
     clearflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN)
 
     applymovement(OBJ_EVENT_ID_PLAYER, Mitis_FaceLeft)
     waitmovement(0)
-    applymovement(LOCALID_JAKE_INTRO, Jake_Intro_ToPlayer)
+    applymovement(MITIS_TOWN_ID_JAKE_INTRO, Jake_Intro_ToPlayer)
     waitmovement(0)
     
     msgbox("I can't believe the day has come!\nWe'll finally get our first Pokémon!\pI saw your parents go to the digging site.\nYou should go check them.\lI'll wait for you at the lab!")
     closemessage
-    applymovement(LOCALID_JAKE_INTRO, Jake_Intro_ToLab)
+    applymovement(MITIS_TOWN_ID_JAKE_INTRO, Jake_Intro_ToLab)
     waitmovement(0)
     
-    removeobject(LOCALID_JAKE_INTRO)
+    removeobject(MITIS_TOWN_ID_JAKE_INTRO)
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN)
+    clearflag(FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE)
     setvar(VAR_LITTLEROOT_TOWN_STATE, 1)
     
     releaseall
