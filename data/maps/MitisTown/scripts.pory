@@ -1,8 +1,13 @@
-raw `
-MitisTown_MapScripts::
-	.byte 0
+mapscripts MitisTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+      setflag(FLAG_VISITED_LITTLEROOT_TOWN)
+    }
 
-`
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_LITTLEROOT_TOWN_STATE, 0: MitisTown_EventScript_JakeIntro
+    ]
+
+}
 
 script MitisTown_EventScript_TownSign {
     lockall
@@ -28,6 +33,31 @@ script MitisTown_EventScript_LabSign {
     releaseall
 }
 
+script MitisTown_EventScript_JakeIntro {
+    lockall
+    msgbox("Hey {PLAYER}, it's me, Jake!")
+    closemessage
+
+    addobject(LOCALID_JAKE_INTRO)
+    clearflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN)
+
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_FaceLeft)
+    waitmovement(0)
+    applymovement(LOCALID_JAKE_INTRO, Jake_Intro_ToPlayer)
+    waitmovement(0)
+    
+    msgbox("I can't believe the day has come!\nWe'll finally get our first Pokémon!\pI saw your parents go to the digging site.\nYou should go check them.\lI'll wait for you at the lab!")
+    closemessage
+    applymovement(LOCALID_JAKE_INTRO, Jake_Intro_ToLab)
+    waitmovement(0)
+    
+    removeobject(LOCALID_JAKE_INTRO)
+    setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN)
+    setvar(VAR_LITTLEROOT_TOWN_STATE, 1)
+    
+    releaseall
+}
+
 script MitisTown_EventScript_DiggingSiteSign {
     lockall
     msgbox("Mitis Town Digging Site.\pNote: those ledges are supposed\nto be stairs...")
@@ -36,10 +66,10 @@ script MitisTown_EventScript_DiggingSiteSign {
 
 script MitisTown_Trigger_BlockPath {
     lockall
-    applymovement(OBJ_EVENT_ID_PLAYER, FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_FaceRight)
     waitmovement(0)
     msgbox("You don't have a Pokémon yet, right?\nYou should go to the lab first.", MSGBOX_AUTOCLOSE)
-    applymovement(OBJ_EVENT_ID_PLAYER, WalkUp)
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkUp)
     waitmovement(0)
     releaseall
 }
@@ -49,11 +79,15 @@ text MitisTownSign {
     "The fresh breeze of a new start."
 }
 
-movement FaceRight {
+movement Mitis_FaceRight {
     face_right
 }
 
-movement WalkUp {
+movement Mitis_FaceLeft {
+    face_left
+}
+
+movement Mitis_WalkUp {
     walk_up
 }
 
