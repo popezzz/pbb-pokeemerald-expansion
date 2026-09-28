@@ -34,40 +34,42 @@ script MitisTown_EventScript_LabSign {
 }
 
 script MitisTown_Trigger_Parents1 {
-  lockall
-  applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkToParents_1)
-  waitmovement(0)
-  goto(MitisTown_EventScript_Parents)
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkToParents_1)
+    waitmovement(0)
+    goto(MitisTown_EventScript_Parents)
 }
 
 script MitisTown_Trigger_Parents2 {
-  lockall
-  applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkToParents_1)
-  waitmovement(0)
-  goto(MitisTown_EventScript_Parents)
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkToParents_2)
+    waitmovement(0)
+    goto(MitisTown_EventScript_Parents)
 }
 
 script MitisTown_EventScript_Parents {
-  msgbox(MitisTown_ParentsDialogue1)
-  applymovement(MITIS_TOWN_ID_MOM, Mitis_ParentsSurprised)
-  applymovement(MITIS_TOWN_ID_DAD, Mitis_ParentsSurprised)
-  waitmovement(0)
+    msgbox(MitisTown_ParentsDialogue1)
+    applymovement(MITIS_TOWN_ID_MOM, Mitis_ParentsSurprised)
+    applymovement(MITIS_TOWN_ID_DAD, Mitis_ParentsSurprised)
+    waitmovement(0)
   
-  msgbox(MitisTown_ParentsDialogue2)
-  applymovement(MITIS_TOWN_ID_MOM, Mitis_MomWalkAway)
-  applymovement(MITIS_TOWN_ID_DAD, Mitis_DadWalkAway)
-  waitmovement(0)
-  removeobject(MITIS_TOWN_ID_MOM)
-  removeobject(MITIS_TOWN_ID_DAD)
+    msgbox(MitisTown_ParentsDialogue2)
+    closemessage
+    applymovement(MITIS_TOWN_ID_MOM, Mitis_MomWalkAway)
+    applymovement(MITIS_TOWN_ID_DAD, Mitis_DadWalkAway)
+    waitmovement(0)
+    removeobject(MITIS_TOWN_ID_MOM)
+    removeobject(MITIS_TOWN_ID_DAD)
 
-  msgbox(MitisTown_PlayerGetGoing)
-  applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkAway)
-  waitmovement(0)
+    msgbox("... I should get going.")
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkAway)
+    waitmovement(0)
 
-  setflag(FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE)
-  setvar(VAR_LITTLEROOT_TOWN_STATE, 2)
+    setflag(FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE)
+    setvar(VAR_LITTLEROOT_TOWN_STATE, 2)
 
-  releaseall
+    releaseall
 }
 
 script MitisTown_EventScript_JakeIntro {
@@ -82,8 +84,8 @@ script MitisTown_EventScript_JakeIntro {
     waitmovement(0)
     applymovement(MITIS_TOWN_ID_JAKE_INTRO, Jake_Intro_ToPlayer)
     waitmovement(0)
-    
-    msgbox("I can't believe the day has come!\nWe'll finally get our first Pokémon!\pI saw your parents go to the digging site.\nYou should go check them.\lI'll wait for you at the lab!")
+   
+    msgbox(MitisTown_JakeDialogue)
     closemessage
     applymovement(MITIS_TOWN_ID_JAKE_INTRO, Jake_Intro_ToLab)
     waitmovement(0)
@@ -117,6 +119,25 @@ text MitisTownSign {
     "The fresh breeze of a new start."
 }
 
+text MitisTown_JakeDialogue {
+    "I can't believe the day has come!\nWe'll finally get our first Pokémon!\p"
+    "I saw your parents go to the digging site.\nYou should go check them.\lI'll wait for you at the lab!"
+}
+
+text MitisTown_ParentsDialogue1 {
+    "Dad: Well, that ought to take care of it...\p"
+    "Mom: We should keep this hidden\nto everyone. For their safety.\p"
+    "Dad: You're right..."
+}
+
+text MitisTown_ParentsDialogue2 {
+    "Mom: {PLAYER}! You startled us!\p"
+    "Dad: Hey champ! We found some things we\nhad to check here before going to the lab\p"
+    "Mom: Today is your special day!\nYou'll finally get your first Pokémon!\p"
+    "Dad: We were about to head to the lab\nto meet up with professor Cypress.\p"
+    "Mom: We'll see you there!"
+}
+
 movement Mitis_FaceRight {
     face_right
 }
@@ -141,3 +162,45 @@ movement Jake_Intro_ToLab {
     face_up
     walk_up * 6
 }
+
+movement Mitis_WalkToParents_1 {
+    walk_up * 4
+    face_left
+    walk_left * 2
+    face_up
+}
+
+movement Mitis_WalkToParents_2 {
+    walk_up * 4
+    face_left
+    walk_left * 3
+    face_up
+}
+
+movement Mitis_ParentsSurprised {
+    face_down
+    emote_exclamation_mark
+    delay_16
+    delay_16
+}
+
+movement Mitis_MomWalkAway {
+    face_right
+    walk_right * 2
+    face_down
+    walk_down * 6
+}
+
+movement Mitis_DadWalkAway {
+    face_right
+    walk_right * 3
+    face_down
+    walk_down * 6
+}
+
+movement Mitis_WalkAway {
+    face_down
+    walk_down
+}
+
+

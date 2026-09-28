@@ -23,17 +23,7 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 1,
-      "y": 2,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_HOUSES_STATE_BRENDAN",
-      "var_value": "0",
-      "script": "NULL"
-    }
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
