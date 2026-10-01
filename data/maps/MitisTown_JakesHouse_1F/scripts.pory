@@ -1,0 +1,32 @@
+mapscripts MitisTown_JakesHouse_1F_MapScripts {
+}
+
+# --------- NPC Scripts --------------
+
+script MitisTown_JakesHouse_1F_EventScript_JakeMom {
+  lockall
+  faceplayer
+  msgbox(MitisTown_JakesHouse_1F_JakeMomDialogue, MSGBOX_AUTOCLOSE)
+  release
+}
+
+script MitisTown_JakesHouse_1F_EventScript_JakeDad {
+  lockall
+  faceplayer
+  msgbox(MitisTown_JakesHouse_1F_JakeDadDialogue, MSGBOX_AUTOCLOSE)
+  release
+}
+
+# -------------- TEXTBOXES -------------------
+
+text MitisTown_JakesHouse_1F_JakeMomDialogue {
+  "Hey {PLAYER}!\p"
+  "Jake's so excited to embark on his\nfirst adventure!\p"
+  "I remember him talking about the\nthing's he'll do with you once\lhe'll get his first Pokémon."
+}
+
+text MitisTown_JakesHouse_1F_JakeDadDialogue {
+  "Can you do me a favor and keep\nan eye on Jake for me?\p"
+  "He's a talented young man, but\nhe's always a bit careless."
+}
+

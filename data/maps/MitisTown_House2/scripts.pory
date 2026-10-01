@@ -1,0 +1,32 @@
+mapscripts MitisTown_House2_MapScripts {
+}
+
+# ------------------- NPC SCRIPTS ----------------
+
+script MitisTown_House2_EventScript_CoupleMan {
+  lockall
+  faceplayer
+  msgbox(MitisTown_House2_CoupleManDialogue, MSGBOX_AUTOCLOSE)
+  releaseall
+}
+
+script MitisTown_House2_EventScript_CoupleWoman {
+    lockall
+    faceplayer
+    msgbox(MitisTown_House2_CoupleWomanDialogue, MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+# -------------------- TEXTBOXES -----------------------
+
+text MitisTown_House2_CoupleManDialogue {
+    "Did you know?\p"
+    "Pokémon are stronger when using moves\nof the same type.\p"
+    "Makes sense."
+}
+
+text MitisTown_House2_CoupleWomanDialogue {
+    "My husband always has interesting\nPokémon bits of knowledge.\p"
+    "Last time he told me some Pokémon\nevolve only when they have a strong\lbond with their trainer."
+}
+

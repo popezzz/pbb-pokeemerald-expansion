@@ -10,6 +10,8 @@ mapscripts MitisTown_PlayersHouse_2F_MapScripts {
     ]
 }
 
+# ----------- STORY SCRIPTS ------------------ 
+
 script MitisTown_PlayersHouse_2F_IntroScript {
     lockall
     msgbox(PlayersHouse_EnoughGames)
@@ -42,26 +44,19 @@ script MitisTown_PlayersHouse_2F_IntroScript {
     releaseall
 }
 
-movement PlayersHouse_FaceRight {
-    face_right
+script MitisTown_PlayersHouse_2F_EventScript_SetWallClock {
+    fadescreen(FADE_TO_BLACK)
+    special(StartWallClock)
+    return
 }
 
-movement PlayersHouse_HeadToTable {
-    walk_right * 3
-    face_up
-    walk_up
+script MitisTown_PlayersHouse_2F_EventScript_UseWallClock {
+    fadescreen(FADE_TO_BLACK)
+    special(Special_ViewWallClock)
+    releaseall
 }
 
-movement PlayersHouse_HeadToClock {
-    face_left
-    walk_left * 4
-    face_up
-}
-
-movement PlayersHouse_JumpDown {
-  face_down
-  jump_down
-}
+# ------------ TEXTBOXES -------------------------
 
 text PlayersHouse_EnoughGames {
   "... Ugh! Enough video games for today.\p"
@@ -86,14 +81,26 @@ text PlayersHouse_GoodToGo {
     "...Perfect! I'm good to go."
 }
 
-script MitisTown_PlayersHouse_2F_EventScript_SetWallClock {
-    fadescreen(FADE_TO_BLACK)
-    special(StartWallClock)
-    return
+# ----------- MOVEMENT -------------------------
+
+movement PlayersHouse_FaceRight {
+    face_right
 }
 
-script MitisTown_PlayersHouse_2F_EventScript_UseWallClock {
-    fadescreen(FADE_TO_BLACK)
-    special(Special_ViewWallClock)
-    releaseall
+movement PlayersHouse_HeadToTable {
+    walk_right * 3
+    face_up
+    walk_up
 }
+
+movement PlayersHouse_HeadToClock {
+    face_left
+    walk_left * 4
+    face_up
+}
+
+movement PlayersHouse_JumpDown {
+  face_down
+  jump_down
+}
+

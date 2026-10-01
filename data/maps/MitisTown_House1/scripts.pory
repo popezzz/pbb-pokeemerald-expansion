@@ -1,0 +1,32 @@
+mapscripts MitisTown_House1_MapScripts {
+}
+
+# ------------ NPC scripts -----------------------
+
+script MitisTown_House1_EventScript_OldWoman {
+  lockall
+  faceplayer
+  msgbox(MitisTown_House1_OldWomanDialogue, MSGBOX_AUTOCLOSE)
+  releaseall
+}
+
+script MitisTown_House1_EventScript_OldMan {
+  lockall
+  faceplayer
+  msgbox(MitisTown_House1_OldManDialogue, MSGBOX_AUTOCLOSE)
+  releaseall
+}
+
+# ------------- TEXTBOXES ----------------------
+
+text MitisTown_House1_OldWomanDialogue {
+  "What I'd do to be young again...\nTo have my own adventure once more...\p"
+  "Remember young man, time is fleeting.\nEnjoy your adventues to the fullest!"
+}
+
+text MitisTown_House1_OldManDialogue {
+  "How time flies...\p"
+  "I remember they once said there were\nonly 151 Pokémon...\l"
+  "Now there are more than 1000 species!"
+}
+

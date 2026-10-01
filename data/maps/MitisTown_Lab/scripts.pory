@@ -1,0 +1,58 @@
+mapscripts MitisTown_Lab_MapScripts {
+}
+
+# ---------- NPC Scripts -------------
+
+script MitisTown_Lab_EventScript_Scientist {
+  lockall
+  faceplayer
+  msgbox(MitisTown_Lab_MegaEvoDialogue, MSGBOX_AUTOCLOSE)
+  applymovement(1, moves(face_up))
+  waitmovement(0)
+  release
+}
+
+script MitisTown_Lab_EventScript_AssistantDave {
+  lockall
+  faceplayer
+  switch(var(VAR_LITTLEROOT_TOWN_STATE)) {
+    case 0:
+    case 1:
+      msgbox(MitisTown_Lab_DaveInfo, MSGBOX_AUTOCLOSE)
+    case 2:
+      msgbox(MitisTown_Lab_DaveChangeStarters, MSGBOX_AUTOCLOSE)
+    default:
+      // boh
+  }
+  applymovement(MITIS_LAB_ID_ASSISTANT_DAVE, moves(face_down))
+  waitmovement(0)
+  releaseall
+}
+
+script MitisTown_Lab_EventScript_Jake {
+  lockall
+  faceplayer
+  msgbox(MitisTown_Lab_JakeIntro, MSGBOX_AUTOCLOSE)
+  applymovement(MITIS_LAB_ID_JAKE, moves(face_left))
+  waitmovement(0)
+  releaseall
+}
+
+# ----------- TEXTBOXES ----------------
+
+text MitisTown_Lab_MegaEvoDialogue {
+  "lorem ipsum"
+}
+
+text MitisTown_Lab_DaveInfo {
+  "lorem ipsum"
+}
+
+text MitisTown_Lab_DaveChangeStarters {
+  "lorem ipsum"
+}
+
+text MitisTown_Lab_JakeIntro {
+  "lorem ipsum"
+}
+
