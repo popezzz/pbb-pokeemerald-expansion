@@ -1744,3 +1744,13 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/MitisTown_PlayersHouse_2F/scripts.inc"
 
 	.include "data/maps/MitisTown_PlayersHouse_1F/scripts.inc"
+
+	.include "data/maps/MitisTown_JakesHouse_2F/scripts.inc"
+
+	.include "data/maps/MitisTown_JakesHouse_1F/scripts.inc"
+
+	.include "data/maps/MitisTown_Lab/scripts.inc"
+
+	.include "data/maps/MitisTown_House2/scripts.inc"
+
+	.include "data/maps/MitisTown_House1/scripts.inc"

@@ -9,29 +9,7 @@ mapscripts MitisTown_MapScripts {
 
 }
 
-script MitisTown_EventScript_TownSign {
-    lockall
-    msgbox(MitisTownSign)
-    releaseall
-}
-
-script MitisTown_EventScript_PlayersHouseSign {
-    lockall
-    msgbox("{PLAYER}'s House.")
-    releaseall
-}
-
-script MitisTown_EventScript_RivalsHouseSign {
-    lockall
-    msgbox("Jake's House.")
-    releaseall
-}
-
-script MitisTown_EventScript_LabSign {
-    lockall
-    msgbox("Roria Pokémon research lab.")
-    releaseall
-}
+# -------- TRIGGERS AND STORY SCRIPTS --------------------
 
 script MitisTown_Trigger_Parents1 {
     lockall
@@ -94,7 +72,49 @@ script MitisTown_EventScript_JakeIntro {
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN)
     clearflag(FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE)
     setvar(VAR_LITTLEROOT_TOWN_STATE, 1)
-    
+  
+    releaseall
+}
+
+script MitisTown_Trigger_BlockPath {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_FaceRight)
+    waitmovement(0)
+    releaseall
+    goto(MitisTown_EventScript_Fisherman)
+}
+
+script MitisTown_Trigger_FishermanSpecial {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_SpecialTrigger_Fisherman)
+    waitmovement(0)
+    releaseall
+    goto(MitisTown_EventScript_Fisherman)
+}
+
+# ------------------ SIGNS -------------------------
+
+script MitisTown_EventScript_TownSign {
+    lockall
+    msgbox(MitisTownSign)
+    releaseall
+}
+
+script MitisTown_EventScript_PlayersHouseSign {
+    lockall
+    msgbox("{PLAYER}'s House.")
+    releaseall
+}
+
+script MitisTown_EventScript_RivalsHouseSign {
+    lockall
+    msgbox("Jake's House.")
+    releaseall
+}
+
+script MitisTown_EventScript_LabSign {
+    lockall
+    msgbox("Roria Pokémon research lab.")
     releaseall
 }
 
@@ -104,15 +124,59 @@ script MitisTown_EventScript_DiggingSiteSign {
     releaseall
 }
 
-script MitisTown_Trigger_BlockPath {
+# ------------------ NPCs --------------------
+
+script MitisTown_EventScript_Scientist {
     lockall
-    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_FaceRight)
-    waitmovement(0)
-    msgbox("You don't have a Pokémon yet, right?\nYou should go to the lab first.", MSGBOX_AUTOCLOSE)
-    applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkUp)
+    faceplayer
+    msgbox(MitisTown_ScientistDialogue, MSGBOX_AUTOCLOSE)
+    applymovement(MITIS_TOWN_ID_SCIENTIST, moves(face_right))
     waitmovement(0)
     releaseall
 }
+
+script MitisTown_EventScript_TechBoy {
+    lockall
+    faceplayer
+    msgbox(MitisTown_TechBoyDialogue, MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+script MitisTown_EventScript_Camper {
+    lockall
+    faceplayer
+    msgbox(MitisTown_CamperDialogue, MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+script MitisTown_EventScript_Woman {
+    lockall
+    faceplayer
+    msgbox(MitisTown_PokeballDialogue, MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+script MitisTown_EventScript_Fisherman {
+    lockall
+    faceplayer
+    switch(var(VAR_LITTLEROOT_INTRO_STATE)) {
+      case 0:
+        msgbox("You don't have a Pokémon yet, right?\nYou should go to the lab first.", MSGBOX_AUTOCLOSE)
+        applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkUp)
+      case 1:
+        msgbox("Good luck on your Journey!\pIf you need help, talk to me.\nI'll heal your Pokémon!", MSGBOX_AUTOCLOSE)
+        applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkAway)
+        setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+      default:
+        msgbox("Here, let me heal your Pokémon!")
+        //heal mons here.
+    }
+    applymovement(MITIS_TOWN_ID_FISHERMAN, moves(face_left))
+    waitmovement(0)
+    releaseall
+}
+
+# --------------- TEXTBOXES -----------------------
 
 text MitisTownSign {
     "Mitis Town.\n"
@@ -132,11 +196,35 @@ text MitisTown_ParentsDialogue1 {
 
 text MitisTown_ParentsDialogue2 {
     "Mom: {PLAYER}! You startled us!\p"
-    "Dad: Hey champ! We found some things we\nhad to check here before going to the lab\p"
+    "Dad: Hey champ! We found some things we\nhad to check here before\lgoing to the lab\p"
     "Mom: Today is your special day!\nYou'll finally get your first Pokémon!\p"
     "Dad: We were about to head to the lab\nto meet up with professor Cypress.\p"
     "Mom: We'll see you there!"
 }
+
+text MitisTown_ScientistDialogue {
+    "At the end of the road lies Roria's\nPokémon research lab.\p"
+    "Years of studies on Pokémon are\nstored and mantained there."
+}
+
+text MitisTown_TechBoyDialogue {
+    "Technology is amazing!\p"
+    "People can easily make their own\ngames using decomps!"
+}
+
+text MitisTown_CamperDialogue {
+    "I'm not a good swimmer.\n"
+    "Matter of fact, I'm scared of water.\p"
+    "People sometimes use Pokémon to\ntravel on water.\p"
+    "I wonder if that'll help me\nfight my fear of water..."
+}
+
+text MitisTown_PokeballDialogue {
+    "Some Pokéballs are better\nthan others.\p"
+    "Some work better on certain Pokémon\nwhile others work better in\lspecific places."
+}
+
+# ------------ MOVEMENT ----------------------
 
 movement Mitis_FaceRight {
     face_right
@@ -203,4 +291,11 @@ movement Mitis_WalkAway {
     walk_down
 }
 
+movement Mitis_SpecialTrigger_Fisherman {
+    face_left
+    walk_left
+    face_down
+    walk_down
+    face_right
+}
 

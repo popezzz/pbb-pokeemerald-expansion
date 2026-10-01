@@ -9355,6 +9355,61 @@
       "border_filepath": "data/layouts/MitisTown_PlayersHouse_1F/border.bin",
       "blockdata_filepath": "data/layouts/MitisTown_PlayersHouse_1F/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MITIS_TOWN_JAKES_HOUSE_2F",
+      "name": "MitisTown_JakesHouse_2F_Layout",
+      "width": 9,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/MitisTown_JakesHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/MitisTown_JakesHouse_2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MITIS_TOWN_JAKES_HOUSE_1F",
+      "name": "MitisTown_JakesHouse_1F_Layout",
+      "width": 11,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/MitisTown_JakesHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/MitisTown_JakesHouse_1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MITIS_TOWN_LAB",
+      "name": "MitisTown_Lab_Layout",
+      "width": 13,
+      "height": 13,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Lab",
+      "border_filepath": "data/layouts/MitisTown_Lab/border.bin",
+      "blockdata_filepath": "data/layouts/MitisTown_Lab/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MITIS_TOWN_HOUSE2",
+      "name": "MitisTown_House2_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MitisTown_House2/border.bin",
+      "blockdata_filepath": "data/layouts/MitisTown_House2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MITIS_TOWN_HOUSE1",
+      "name": "MitisTown_House1_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MitisTown_House1/border.bin",
+      "blockdata_filepath": "data/layouts/MitisTown_House1/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

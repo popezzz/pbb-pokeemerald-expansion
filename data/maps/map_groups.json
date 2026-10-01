@@ -142,8 +142,7 @@
     "LittlerootTown_BrendansHouse_2F",
     "LittlerootTown_MaysHouse_1F",
     "LittlerootTown_MaysHouse_2F",
-    "LittlerootTown_ProfessorBirchsLab",
-    "MitisTown_PlayersHouse_1F"
+    "LittlerootTown_ProfessorBirchsLab"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",
@@ -1168,6 +1167,12 @@
     "MitisTown"
   ],
   "gMapGroup_Roria_IndoorMitis": [
-    "MitisTown_PlayersHouse_2F"
+    "MitisTown_PlayersHouse_1F",
+    "MitisTown_PlayersHouse_2F",
+    "MitisTown_JakesHouse_1F",
+    "MitisTown_JakesHouse_2F",
+    "MitisTown_Lab",
+    "MitisTown_House2",
+    "MitisTown_House1"
   ]
 }
