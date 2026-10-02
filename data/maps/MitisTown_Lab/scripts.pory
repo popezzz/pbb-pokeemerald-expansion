@@ -1,4 +1,16 @@
 mapscripts MitisTown_Lab_MapScripts {
+  MAP_SCRIPT_ON_TRANSITION {
+    if (var(VAR_LITTLEROOT_TOWN_STATE) == 1) {
+      setvar(VAR_BIRCH_LAB_STATE, 0)
+      setflag(FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2) // hide second professor
+      setflag(FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM) // hide parents
+      setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM) // hide Cypress
+    }
+    elif (var(VAR_LITTLEROOT_TOWN_STATE) == 2) {
+      clearflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM)
+      clearflag(FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM)
+    }
+  }
 }
 
 # ---------- NPC Scripts -------------
@@ -9,20 +21,21 @@ script MitisTown_Lab_EventScript_Scientist {
   msgbox(MitisTown_Lab_MegaEvoDialogue, MSGBOX_AUTOCLOSE)
   applymovement(1, moves(face_up))
   waitmovement(0)
-  release
+  releaseall
 }
 
 script MitisTown_Lab_EventScript_AssistantDave {
   lockall
   faceplayer
-  switch(var(VAR_LITTLEROOT_TOWN_STATE)) {
+  switch(var(VAR_BIRCH_LAB_STATE)) {
     case 0:
-    case 1:
       msgbox(MitisTown_Lab_DaveInfo, MSGBOX_AUTOCLOSE)
-    case 2:
+      msgbox(MitisTown_Lab_DaveChooseForFree, MSGBOX_AUTOCLOSE)
+    case 1:
       msgbox(MitisTown_Lab_DaveChangeStarters, MSGBOX_AUTOCLOSE)
     default:
-      // boh
+      msgbox(MitisTown_Lab_DaveInfo, MSGBOX_AUTOCLOSE)
+      
   }
   applymovement(MITIS_LAB_ID_ASSISTANT_DAVE, moves(face_down))
   waitmovement(0)
@@ -41,11 +54,13 @@ script MitisTown_Lab_EventScript_Jake {
 # ----------- TEXTBOXES ----------------
 
 text MitisTown_Lab_MegaEvoDialogue {
-  "lorem ipsum"
+  "I'm researching Mega Evolution.\p"
+  "Such a wonderful and mysterious phenomena...\p"
+  "I've had the opportunity to\ntalk with Professor Sycamore from\lthe Kalos region about it."
 }
 
 text MitisTown_Lab_DaveInfo {
-  "lorem ipsum"
+  "The professor gives trainers a\nrare Pokémon every 20 species they\lregister on the Pokédex."
 }
 
 text MitisTown_Lab_DaveChangeStarters {
@@ -53,6 +68,10 @@ text MitisTown_Lab_DaveChangeStarters {
 }
 
 text MitisTown_Lab_JakeIntro {
-  "lorem ipsum"
+  "Professor Cypress should be here\nany minute now, so go check your\lparents."
+  "Your parents are at the digging\nsite."
 }
 
+text MitisTown_Lab_DaveChooseForFree {
+  "For this occasion though, you'll\nget one for free!"
+}

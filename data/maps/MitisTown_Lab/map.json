@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "MitisTown_Lab_EventScript_Scientist",
       "flag": "0"
     },
     {
@@ -39,7 +39,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM"
     },
     {
       "local_id": "MITIS_LAB_ID_JAKE",
@@ -52,8 +52,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "script": "MitisTown_Lab_EventScript_Jake",
+      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM"
     },
     {
       "local_id": "MITIS_LAB_ID_DAD",
@@ -67,7 +67,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM"
     },
     {
       "local_id": "MITIS_LAB_ID_ASSISTANT_DAVE",
@@ -80,7 +80,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "MitisTown_Lab_EventScript_AssistantDave",
       "flag": "0"
     },
     {
@@ -95,7 +95,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
@@ -148,19 +148,19 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_RECEIVED_POKEDEX_FROM_BIRCH"
+      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2"
     }
   ],
   "warp_events": [
     {
-      "x": 7,
+      "x": 6,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_MITIS_TOWN",
       "dest_warp_id": "4"
     },
     {
-      "x": 6,
+      "x": 7,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_MITIS_TOWN",
