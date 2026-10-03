@@ -16877,3 +16877,20 @@ Double Battle: No
 Kyogre
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+/*RORIA_START*/
+
+=== TRAINER_JAKE_MITIS_LAB ===
+Name: Jake
+Class: Rival
+Pic: Wally
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Eevee
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Tackle
+- Growl

@@ -39,7 +39,8 @@ script MitisTown_EventScript_Parents {
     removeobject(MITIS_TOWN_ID_MOM)
     removeobject(MITIS_TOWN_ID_DAD)
 
-    msgbox("... I should get going.")
+    
+    msgbox("{SPEAKER NAME_PLAYER}... I should get going.")
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkAway)
     waitmovement(0)
@@ -62,7 +63,8 @@ script MitisTown_EventScript_JakeIntro {
     waitmovement(0)
     applymovement(MITIS_TOWN_ID_JAKE_INTRO, Jake_Intro_ToPlayer)
     waitmovement(0)
-   
+  
+    setspeaker("Jake")
     msgbox(MitisTown_JakeDialogue)
     closemessage
     applymovement(MITIS_TOWN_ID_JAKE_INTRO, Jake_Intro_ToLab)
@@ -189,17 +191,22 @@ text MitisTown_JakeDialogue {
 }
 
 text MitisTown_ParentsDialogue1 {
-    "Dad: Well, that ought to take care of it...\p"
-    "Mom: We should keep this hidden\nto everyone. For their safety.\p"
-    "Dad: You're right..."
+    "{SPEAKER NAME_MOM}Well that ought to take care of it...\p"
+    "{SPEAKER NAME_DAD}We have to keep this a secret, for\neveryone's safety.\p"
+    "{SPEAKER NAME_MOM}You're right.\pIt's too dangerous for anyone to go\ndown there.\p"
+    "{SPEAKER NAME_DAD}I don't think we should tell anybody\nabout this.\p"
+    "{SPEAKER NAME_MOM}Maybe we can tell that new professor.\p"
+    "{SPEAKER NAME_DAD}Maybe you're right."
 }
 
 text MitisTown_ParentsDialogue2 {
-    "Mom: {PLAYER}! You startled us!\p"
-    "Dad: Hey champ! We found some things we\nhad to check here before\lgoing to the lab\p"
-    "Mom: Today is your special day!\nYou'll finally get your first Pokémon!\p"
-    "Dad: We were about to head to the lab\nto meet up with professor Cypress.\p"
-    "Mom: We'll see you there!"
+    "{SPEAKER NAME_MOM}{PLAYER}! You startled us!\p"
+    "{SPEAKER NAME_DAD}Hey champ!\pToday is the day you get your first\nPokémon!\p"
+    "{SPEAKER NAME_MOM}We are so happy for you, sweetie!\p"
+    "{SPEAKER NAME_DAD}Sorry we didn't meet you at home.\pWe just discovered something in the\ncave last night.\p"
+    "{SPEAKER NAME_DAD}As archeologists, your mother and I are\nvery thorough in our work.\p"
+    "{SPEAKER NAME_MOM}That's right, but enough talking.\pLet's head down to the research lab\nand let you pick your very first\lPokémon!\p"
+    "{SPEAKER NAME_DAD}We'll see you there!"
 }
 
 text MitisTown_ScientistDialogue {

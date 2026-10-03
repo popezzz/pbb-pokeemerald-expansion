@@ -107,7 +107,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "MitisTown_Lab_EventScript_GrassBall",
       "flag": "0"
     },
     {
@@ -120,7 +120,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "MitisTown_Lab_EventScript_FireBall",
       "flag": "0"
     },
     {
@@ -133,7 +133,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "MitisTown_Lab_EventScript_WaterBall",
       "flag": "0"
     },
     {
@@ -167,7 +167,44 @@
       "dest_warp_id": "4"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_BIRCH_LAB_STATE",
+      "var_value": "1",
+      "script": "MitisTown_Lab_Trigger_ChooseStarter_3"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_BIRCH_LAB_STATE",
+      "var_value": "1",
+      "script": "MitisTown_Lab_Trigger_ChooseStarter_1"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_BIRCH_LAB_STATE",
+      "var_value": "1",
+      "script": "MitisTown_Lab_Trigger_ChooseStarter_1"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_BIRCH_LAB_STATE",
+      "var_value": "1",
+      "script": "MitisTown_Lab_Trigger_ChooseStarter_2"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",

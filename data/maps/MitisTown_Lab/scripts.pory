@@ -9,9 +9,928 @@ mapscripts MitisTown_Lab_MapScripts {
     elif (var(VAR_LITTLEROOT_TOWN_STATE) == 2) {
       clearflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM)
       clearflag(FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM)
+      setflag(FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2)
     }
   }
+  MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+    VAR_LITTLEROOT_TOWN_STATE, 2 {
+      turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+    }
+  ]
+
+  MAP_SCRIPT_ON_FRAME_TABLE [
+    VAR_LITTLEROOT_TOWN_STATE, 2: MitisTown_Lab_StarterChoiceIntro
+  ]
 }
+
+# ------------ Main Story Scripts and Triggers --------------------
+
+script MitisTown_Lab_StarterChoiceIntro {
+  lockall
+  applymovement(OBJ_EVENT_ID_PLAYER, MitisLab_WalkToCypress)
+  waitmovement(0)
+  setspeaker("Prof. Cypress")
+  msgbox(MitisTown_Lab_CypressIntro, MSGBOX_AUTOCLOSE)
+  waitmessage
+  applymovement(OBJ_EVENT_ID_PLAYER, MitisLab_WalkToTable)
+  waitmovement(0)
+  setvar(VAR_BIRCH_LAB_STATE, 1)
+  setvar(VAR_LITTLEROOT_TOWN_STATE, 3)
+  releaseall
+}
+
+script MitisTown_Lab_ObtainPokedex {
+  lockall
+  msgbox(MitisTown_Lab_CypressGivePokedex, MSGBOX_NPC)
+  playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
+  msgbox("Obtained the Pokédex!")
+  waitfanfare
+  setflag(FLAG_SYS_POKEDEX_GET)
+  special(SetUnlockedPokedexFlags)
+  setflag(FLAG_SYS_NATIONAL_DEX)
+  special(EnableNationalPokedex)
+  msgbox(MitisTown_Lab_PokedexObtained, MSGBOX_NPC)
+  msgbox(MitisTown_Lab_CypressGoodLuck)
+  releaseall
+  goto(MitisTown_Lab_RivalBattle)
+}
+
+script MitisTown_Lab_RivalBattle {
+  lock
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_down, walk_down * 6))
+  waitmovement(0)
+
+  playse(SE_PIN)
+  applymovement(MITIS_LAB_ID_JAKE, moves(emote_exclamation_mark, delay_16 * 2))
+  waitmovement(0)
+  msgbox("{SPEAKER NAME_JAKE}Hey, {PLAYER}, wait up!", MSGBOX_NPC)
+  closemessage
+
+  playbgm(MUS_ENCOUNTER_BRENDAN, 0)
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_up))
+  applymovement(MITIS_LAB_ID_JAKE, moves(walk_fast_left * 3, face_down, walk_fast_down * 2))
+  waitmovement(0)
+
+  setflag(FLAG_NO_WHITEOUT)
+  msgbox(MitisTown_Lab_JakeBattleIntro, MSGBOX_NPC)
+  trainerbattle_no_intro(TRAINER_JAKE_MITIS_LAB, MitisTown_Lab_JakeBattleOutro)
+  clearflag(FLAG_NO_WHITEOUT)
+  fadedefaultbgm
+  msgbox(MitisTown_Lab_JakePostBattle)
+  special(HealPlayerParty)
+  release
+}
+
+script MitisTown_Lab_Trigger_ChooseStarter_1 {
+  lockall
+  msgbox("Don't leave without choosing your\nPokémon!", MSGBOX_AUTOCLOSE)
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_up, walk_up))
+  waitmovement(0)
+  releaseall
+}
+
+script MitisTown_Lab_Trigger_ChooseStarter_2 {
+  lockall
+  msgbox("Don't leave without choosing your\nPokémon!", MSGBOX_AUTOCLOSE)
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_left, walk_left))
+  waitmovement(0)
+  releaseall
+}
+
+script MitisTown_Lab_Trigger_ChooseStarter_3 {
+  lockall
+  msgbox("Don't leave without choosing your\nPokémon!", MSGBOX_AUTOCLOSE)
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_right, walk_right))
+  waitmovement(0)
+  releaseall
+}
+
+script MitisTown_Lab_EventScript_GrassBall {
+  lock
+  switch(var(VAR_BIRCH_LAB_STATE)) {
+    case 0:
+      msgbox("I should wait...", MSGBOX_AUTOCLOSE)
+    case 1:
+      call(GrassStarterChoice)
+      if(flag(FLAG_SYS_POKEMON_GET))
+        applymovement(OBJ_EVENT_ID_PLAYER, MitisLab_GrassToCypress)
+        waitmovement(0)
+        release
+        goto(MitisTown_Lab_ObtainPokedex)
+      }
+    case 2:
+    default:
+      msgbox("I shouldn't take another, for now.", MSGBOX_AUTOCLOSE)
+  }
+  release
+}
+
+script MitisTown_Lab_EventScript_FireBall {
+  lock
+  switch(var(VAR_BIRCH_LAB_STATE)) {
+    case 0:
+      msgbox("I should wait...", MSGBOX_AUTOCLOSE)
+    case 1:
+      call(FireStarterChoice)
+        if(flag(FLAG_SYS_POKEMON_GET)) {
+        applymovement(OBJ_EVENT_ID_PLAYER, MitisLab_FireToCypress)
+        waitmovement(0)
+        release
+        goto(MitisTown_Lab_ObtainPokedex)
+      }
+    case 2:
+    default:
+      msgbox("I shouldn't take another, for now.", MSGBOX_AUTOCLOSE)
+  }
+  release
+}
+
+script MitisTown_Lab_EventScript_WaterBall {
+  lock
+  switch(var(VAR_BIRCH_LAB_STATE)) {
+    case 0:
+      msgbox("I should wait...", MSGBOX_AUTOCLOSE)
+    case 1:
+      call(WaterStarterChoice)
+      if(flag(FLAG_SYS_POKEMON_GET)) {
+        applymovement(OBJ_EVENT_ID_PLAYER, MitisLab_WaterToCypress)
+        waitmovement(0)
+        release
+        goto(MitisTown_Lab_ObtainPokedex)
+      }
+    case 2:
+    default:
+      msgbox("I shouldn't take another, for now.", MSGBOX_AUTOCLOSE)
+  }
+  release
+}
+
+script StarterFade {
+  fadescreen(FADE_TO_BLACK)
+  delay(20)
+  fadescreen(FADE_FROM_BLACK)
+  return
+}
+
+script NicknamePartyMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+}
+
+script GrassStarterChoice {
+  switch(var(VAR_STARTER_REGION)) {
+    case 1:
+      showmonpic(SPECIES_CHIKORITA, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Chikorita, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_CHIKORITA, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Chikorita!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)  
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 2:
+      showmonpic(SPECIES_TREECKO, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Treecko, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_TREECKO, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Treecko!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 3:
+      showmonpic(SPECIES_TURTWIG, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Turtwig, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_TURTWIG, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Turtwig!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 4:
+      showmonpic(SPECIES_SNIVY, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Snivy, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_SNIVY, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Snivy!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 5:
+      showmonpic(SPECIES_CHESPIN, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Chespin, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_CHESPIN, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Chespin!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 6:
+      showmonpic(SPECIES_ROWLET, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Rowlet, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_ROWLET, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Rowlet!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 7:
+      showmonpic(SPECIES_GROOKEY, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Grookey, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_GROOKEY, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Grookey!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 8:
+      showmonpic(SPECIES_SPRIGATITO, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Sprigatito, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_SPRIGATITO, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Sprigatito!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 0:
+    default:
+      showmonpic(SPECIES_BULBASAUR, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Bulbasaur, the\nGrass type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_BULBASAUR, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Bulbasaur!")
+          waitfanfare
+          removeobject(7)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+  }
+  return
+}
+
+script FireStarterChoice {
+  switch(var(VAR_STARTER_REGION)) {
+    case 1:
+      showmonpic(SPECIES_CYNDAQUIL, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Cindaquil, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_CYNDAQUIL, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Cyndaquil!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)  
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 2:
+      showmonpic(SPECIES_TORCHIC, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Torchic, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_TORCHIC, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Torchic!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 3:
+      showmonpic(SPECIES_CHIMCHAR, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Chimchar, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_CHIMCHAR, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Chimchar!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 4:
+      showmonpic(SPECIES_TEPIG, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Tepig, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_TEPIG, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Tepig!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 5:
+      showmonpic(SPECIES_FENNEKIN, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Fennekin, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_FENNEKIN, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Fennekin!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 6:
+      showmonpic(SPECIES_LITTEN, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Litten, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_LITTEN, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Litten!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 7:
+      showmonpic(SPECIES_SCORBUNNY, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Scorbunny, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_SCORBUNNY, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Scorbunny!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 8:
+      showmonpic(SPECIES_FUECOCO, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Fuecoco, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_FUECOCO, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Fuecoco!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 0:
+    default:
+      showmonpic(SPECIES_CHARMANDER, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Charmander, the\nFire type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_CHARMANDER, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Charmander!")
+          waitfanfare
+          removeobject(8)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+  }
+  return
+}
+
+script WaterStarterChoice {
+  switch(var(VAR_STARTER_REGION)) {
+    case 1:
+      showmonpic(SPECIES_TOTODILE, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Totodile, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_TOTODILE, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Totodile!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)  
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 2:
+      showmonpic(SPECIES_MUDKIP, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Mudkip, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_MUDKIP, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Mudkip!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 3:
+      showmonpic(SPECIES_PIPLUP, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Piplup, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_PIPLUP, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Piplup!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 4:
+      showmonpic(SPECIES_OSHAWOTT, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Oshawott, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_OSHAWOTT, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Oshawott!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 5:
+      showmonpic(SPECIES_FROAKIE, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Froakie, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_FROAKIE, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Froakie!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 6:
+      showmonpic(SPECIES_POPPLIO, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Popplio, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_POPPLIO, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Popplio!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 7:
+      showmonpic(SPECIES_SOBBLE, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Sobble, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_SOBBLE, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Sobble!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 8:
+      showmonpic(SPECIES_QUAXLY, 10, 3)
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Quaxly, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_QUAXLY, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Quaxly!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+    case 0:
+    default:
+      showmonpic(SPECIES_SQUIRTLE, 10, 3) 
+			setspeaker("Prof. Cypress")
+			msgbox("So, will you choose Squirtle, the\nWater type Pokémon?", MSGBOX_YESNO)
+      if(var(VAR_RESULT) == YES) {
+        givemon(SPECIES_SQUIRTLE, 5)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+          setspeaker(NULL)
+					playfanfare(MUS_OBTAIN_ITEM)
+          msgbox("Received Squirtle!")
+          waitfanfare
+          removeobject(9)
+          call(NicknamePartyMon)
+          if(var(VAR_BIRCH_LAB_STATE) == 1) {
+            setflag(FLAG_SYS_POKEMON_GET)
+          }
+        }
+        else {
+          hidemonpic
+          msgbox("No more room in party.", MSGBOX_AUTOCLOSE)
+        }
+        setvar(VAR_BIRCH_LAB_STATE, 2)
+      }
+      else {
+        hidemonpic
+        msgbox("Take your time.", MSGBOX_AUTOCLOSE)  
+      }
+  }
+  return
+}
+
 
 # ---------- NPC Scripts -------------
 
@@ -25,27 +944,77 @@ script MitisTown_Lab_EventScript_Scientist {
 }
 
 script MitisTown_Lab_EventScript_AssistantDave {
-  lockall
+  lock
   faceplayer
   switch(var(VAR_BIRCH_LAB_STATE)) {
     case 0:
-      msgbox(MitisTown_Lab_DaveInfo, MSGBOX_AUTOCLOSE)
-      msgbox(MitisTown_Lab_DaveChooseForFree, MSGBOX_AUTOCLOSE)
+      setspeaker("Dave")
+      msgbox(MitisTown_Lab_DaveInfo, MSGBOX_NPC)
+      setspeaker("Dave")
+      msgbox(MitisTown_Lab_DaveChooseForFree, MSGBOX_NPC)
     case 1:
-      msgbox(MitisTown_Lab_DaveChangeStarters, MSGBOX_AUTOCLOSE)
+      setspeaker("Dave")
+      msgbox(MitisTown_Lab_DaveChangeStarters)
+      dynmultichoice(25, 5, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE,
+        "Kanto",
+        "Johto",
+        "Hoenn",
+        "Sinnoh",
+        "Unova",
+        "Kalos",
+        "Alola",
+        "Galar",
+        "Paldea"
+      ) 
+      closemessage
+      switch(var(VAR_RESULT)) {
+        case 1:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 1)
+        case 2:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 2)
+        case 3:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 3)
+        case 4:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 4)
+        case 5:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 5)
+        case 6:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 6)
+        case 7:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 7)
+        case 8:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 8)
+        case 0:
+        default:
+          call(StarterFade)
+          setvar(VAR_STARTER_REGION, 0)
+      }
+      setspeaker("Dave")
+      msgbox("Choose Wisely.", MSGBOX_NPC)
+      waitmessage
     default:
+      setspeaker("Dave")
       msgbox(MitisTown_Lab_DaveInfo, MSGBOX_AUTOCLOSE)
       
   }
   applymovement(MITIS_LAB_ID_ASSISTANT_DAVE, moves(face_down))
   waitmovement(0)
-  releaseall
+  release
 }
 
 script MitisTown_Lab_EventScript_Jake {
   lockall
   faceplayer
-  msgbox(MitisTown_Lab_JakeIntro, MSGBOX_AUTOCLOSE)
+  setspeaker("Jake")
+  msgbox(MitisTown_Lab_JakeIntro, MSGBOX_NPC)
   applymovement(MITIS_LAB_ID_JAKE, moves(face_left))
   waitmovement(0)
   releaseall
@@ -64,14 +1033,111 @@ text MitisTown_Lab_DaveInfo {
 }
 
 text MitisTown_Lab_DaveChangeStarters {
-  "lorem ipsum"
+  "What region would you like to choose?"
 }
 
 text MitisTown_Lab_JakeIntro {
-  "Professor Cypress should be here\nany minute now, so go check your\lparents."
+  "Professor Cypress should be here\nany minute now, so go check your\lparents.\p"
   "Your parents are at the digging\nsite."
 }
 
 text MitisTown_Lab_DaveChooseForFree {
   "For this occasion though, you'll\nget one for free!"
 }
+
+text MitisTown_Lab_CypressIntro {
+  "Hello, My name is Professor Cypress.\n"
+  "I am the new professor in Mitis Town.\p"
+  "I'll bet you're {PLAYER}. Your parents\n"
+  "were just telling me about you.\p"
+  "You must be very excited to get your\n"
+  "first Pokémon today.\p"
+  "There are a few things you must know\n"
+  "about Pokémon first.\p"
+  "Pokémon are our friends, and we grow\n"
+  "alongside them. They grow, and in\l"
+  "some cases evolve and change form, as\l"
+  "we battle with them.\p"
+  "Your Pokémon will grow to love you as\n"
+  "you adventure with them.\p"
+  "There are still lots of things we do not\n"
+  "fully know about Pokémon.\p"
+  "{PLAYER}, I want you now to pick a\n"
+  "Pokémon that will accompany you on your\l"
+  "adventures.\p"
+  "Make a choice between one of these 27\n"
+  "different species. Talk to my assistant\l"
+  "Dave if you want to see species from\l"
+  "other regions.\p"
+  "Go ahead now."
+}
+
+text MitisTown_Lab_CypressGivePokedex {
+  "{SPEAKER NAME_CYPRESS}Excellent choice, {PLAYER}!\p"
+  "{SPEAKER NAME_MOM}Your new Pokémon is so cute!\p"
+  "{SPEAKER NAME_DAD}That definitely has battle potential!\p"
+  "{SPEAKER NAME_JAKE}I hope you and your Pokémon become best\nfriends like we are!\p"
+  "{SPEAKER NAME_CYPRESS}Alright, {PLAYER}, many challenges await\nyou.\pLet me give you one more gift that will\nhelp you along your way\p"
+  "{SPEAKER NAME_CYPRESS}It's a Pokédex.\pIt's an electronic encyclopedia that\nrecords the kinds of Pokémon you\lencounter and capture.\p"
+  "{SPEAKER NAME_CYPRESS}Not only that, you'll also help the lab's\nresearch efforts!"
+}
+
+text MitisTown_Lab_PokedexObtained {
+  "{SPEAKER NAME_CYPRESS}Also, once every 20 species of Pokémon\nyou register on the Pokédex, you can\lcome back here and get another one of \lthese rare Pokémon for free!\l"
+  "{SPEAKER NAME_CYPRESS}Be sure to check it out!\p"
+  "{SPEAKER NAME_CYPRESS}Now, what are you waiting for?\pGo and explore the world of Pokémon!\p"
+  "{SPEAKER NAME_DAD}That's right, {PLAYER}. Go ahead and have\nfun with your new Pokémon.\pWe need to stay behind and talk to the\nprofessor for a minute.\pWe'll meet up with you later."
+}
+
+text MitisTown_Lab_CypressGoodLuck {
+  "{SPEAKER NAME_CYPRESS}I wish you best of luck on your journey,\n{PLAYER}!"
+}
+
+text MitisTown_Lab_JakeBattleIntro {
+  "{SPEAKER NAME_JAKE}We have Pokémon now!\pLET'S BATTLE!!"    
+}
+
+text MitisTown_Lab_JakeBattleOutro {
+  "Amazing!"
+}
+
+text MitisTown_Lab_JakePostBattle {
+  "Nice fighting!\pHere, let me heal your Pokémon."
+}
+
+# --------------- MOVEMENT -------------------
+
+movement MitisLab_WalkToCypress {
+  face_up
+  walk_up * 8
+}
+
+movement MitisLab_WalkToTable {
+  face_down
+  walk_down
+  face_right
+  walk_right * 3
+  face_up
+}
+
+movement MitisLab_GrassToCypress {
+  face_left
+  walk_left * 2
+  face_up
+  walk_up
+}
+
+movement MitisLab_FireToCypress {
+  face_left
+  walk_left * 3
+  face_up
+  walk_up
+}
+
+movement MitisLab_WaterToCypress {
+  face_left
+  walk_left * 4
+  face_up
+  walk_up
+}
+
