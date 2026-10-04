@@ -1164,7 +1164,8 @@
     "SevenIsland_SevaultCanyon_House_Frlg"
   ],
   "gMapGroup_Roria_TownsAndRoutes": [
-    "MitisTown"
+    "MitisTown",
+    "Route1"
   ],
   "gMapGroup_Roria_IndoorMitis": [
     "MitisTown_PlayersHouse_1F",

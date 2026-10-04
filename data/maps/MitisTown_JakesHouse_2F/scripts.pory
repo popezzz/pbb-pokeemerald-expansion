@@ -1,0 +1,24 @@
+mapscripts MitisTown_JakesHouse_2F_MapScripts {
+  MAP_SCRIPT_ON_TRANSITION {
+    if(var(VAR_LITTLEROOT_TOWN_STATE) == 3) {
+      clearflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM)
+    }
+    else {
+      setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM)
+    }
+  }
+}
+
+script MitisTown_JakesHouse_2F_EventScript_Jake {
+  lockall
+  faceplayer
+  msgbox(MitisTown_JakesHouse_2F_JakeDialogue, MSGBOX_NPC)
+  applymovement(1, moves(face_up))
+  waitmovement(0)
+  releaseall
+}
+
+text MitisTown_JakesHouse_2F_JakeDialogue {
+  "{SPEAKER NAME_JAKE}I need to gather a few things\nbefore I set off on my adventure.\p"
+  "{SPEAKER NAME_JAKE}I'll see you later in Cheshma Town!" 
+}

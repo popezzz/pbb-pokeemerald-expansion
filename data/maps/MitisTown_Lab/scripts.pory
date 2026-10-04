@@ -79,6 +79,56 @@ script MitisTown_Lab_RivalBattle {
   msgbox(MitisTown_Lab_JakePostBattle)
   special(HealPlayerParty)
   release
+
+  goto(MitisTown_Lab_BronzeBrick)
+}
+
+script MitisTown_Lab_BronzeBrick {
+  lockall
+  applymovement(MITIS_LAB_ID_MOM, MitisLab_ParentsToPlayer)
+  applymovement(MITIS_LAB_ID_DAD, MitisLab_ParentsToPlayer)
+  waitmovement(0)
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_right))
+  applymovement(MITIS_LAB_ID_JAKE, moves(face_right))
+  waitmovement(0)
+  msgbox(MitisTown_Lab_ParentsGiveBronzeBrick)
+  playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
+  additem(ITEM_BRONZE_BRICK, 1)
+  msgbox("{SPEAKER NAME_NONE}Obtained the Bronze Brick!")
+  waitfanfare
+  msgbox("{PLAYER} put the Bronze Brick in the Bag.")
+  msgbox(MitisTown_Lab_ParentsLeave)
+  closemessage
+  applymovement(MITIS_LAB_ID_DAD, MitisLab_ParentsWalkAway)
+  delay(5)
+  applymovement(MITIS_LAB_ID_MOM, MitisLab_ParentsWalkAway)
+  playse(SE_EXIT)
+  applymovement(MITIS_LAB_ID_MOM, moves(walk_down))
+  playse(SE_EXIT)
+  waitmovement(0)
+  removeobject(MITIS_LAB_ID_DAD)
+  removeobject(MITIS_LAB_ID_MOM)
+  setflag(FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM)
+  
+  applymovement(OBJ_EVENT_ID_PLAYER, moves(face_up))
+  applymovement(MITIS_LAB_ID_JAKE, moves(face_down))
+  msgbox(MitisTown_Lab_JakeGivePokeballs)
+  setspeaker(NULL)
+  additem(ITEM_POKE_BALL, 5)
+  playfanfare(MUS_OBTAIN_ITEM)
+  msgbox("Obtained 5 Pokéballs!")
+  waitfanfare
+  msgbox("{PLAYER} put the Pokéballs in the Bag.")
+  msgbox(MitisTown_Lab_JakeLeave)
+  closemessage
+  applymovement(MITIS_LAB_ID_JAKE, MitisLab_JakeWalkAway)
+  waitmovement(0)
+  playse(SE_EXIT)
+  removeobject(MITIS_LAB_ID_JAKE)
+  setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM)
+
+  setvar(VAR_LITTLEROOT_INTRO_STATE, 1)
+  releaseall
 }
 
 script MitisTown_Lab_Trigger_ChooseStarter_1 {
@@ -112,7 +162,7 @@ script MitisTown_Lab_EventScript_GrassBall {
       msgbox("I should wait...", MSGBOX_AUTOCLOSE)
     case 1:
       call(GrassStarterChoice)
-      if(flag(FLAG_SYS_POKEMON_GET))
+      if(flag(FLAG_SYS_POKEMON_GET)) {
         applymovement(OBJ_EVENT_ID_PLAYER, MitisLab_GrassToCypress)
         waitmovement(0)
         release
@@ -722,7 +772,6 @@ script WaterStarterChoice {
           msgbox("Received Mudkip!")
           waitfanfare
           removeobject(9)
-          call(NicknamePartyMon)
           if(var(VAR_BIRCH_LAB_STATE) == 1) {
             setflag(FLAG_SYS_POKEMON_GET)
           }
@@ -1020,6 +1069,14 @@ script MitisTown_Lab_EventScript_Jake {
   releaseall
 }
 
+script MitisTown_Lab_EventScript_Cypress {
+  lockall
+  faceplayer
+  setspeaker("Prof. Cypress")
+  msgbox(MitisTown_Lab_CypressGoodLuck, MSGBOX_NPC)
+  releaseall
+}
+
 # ----------- TEXTBOXES ----------------
 
 text MitisTown_Lab_MegaEvoDialogue {
@@ -1105,6 +1162,35 @@ text MitisTown_Lab_JakePostBattle {
   "Nice fighting!\pHere, let me heal your Pokémon."
 }
 
+text MitisTown_Lab_ParentsGiveBronzeBrick {
+  "{SPEAKER NAME_MOM}{PLAYER}, that was an excellent battle!\p"
+  "{SPEAKER NAME_MOM}Your father and I watched you while we\nwere discussing things with the\lprofessor.\p"
+  "{SPEAKER NAME_DAD}We are very proud of you in taking this\nstep to become a Pokémon Trainer!\p"
+  "{SPEAKER NAME_DAD}We want you to know that we will be\nsupporting you as you explore Roria.\p"
+  "{SPEAKER NAME_MOM}You need to be careful, as you are\ngoing to be out on your own for the\lfirst time.\p"
+  "{SPEAKER NAME_MOM}Don't forget to floss!\p"
+  "{SPEAKER NAME_DAD}{PLAYER}, we want to give you something\nto take with you as a gift to celebrate\lthis momentous occasion."
+}
+
+text MitisTown_Lab_ParentsLeave {
+  "{SPEAKER NAME_DAD}I made it into a necklace just this\nmorning.\p"
+  "{SPEAKER NAME_DAD}When you look at it, remember your\nfamily who loves you.\pDon't forget to keep it safe.\p"
+  "{SPEAKER NAME_MOM}We're headed back to the house.\pIf you need anything, that's where you\ncan find us!"
+}
+
+text MitisTown_Lab_JakeGivePokeballs {
+  "{SPEAKER NAME_JAKE}Wow, that was really cool of your\nparents.\p"
+  "{SPEAKER NAME_JAKE}Oh, by the way, I have something for\nyou.\pThey're for catching wild Pokémon!"
+}
+
+text MitisTown_Lab_JakeLeave {
+  "{SPEAKER NAME_JAKE}It works best if you weaken the\nPokémon before throwing a Pokéball at it.\p"
+  "{SPEAKER NAME_JAKE}Well, I need to gather a few things\nbefore I set off on my adventure.\p"
+  "{SPEAKER NAME_JAKE}You should go start training your\nPokémon on Route 1!\p"
+  "{SPEAKER NAME_JAKE}Past route 1 is Cheshma Town.\pThat'll be a good place for us to\nmeet up.\p"
+  "{SPEAKER NAME_JAKE}Alright, I'll see you later!"
+}
+
 # --------------- MOVEMENT -------------------
 
 movement MitisLab_WalkToCypress {
@@ -1141,3 +1227,21 @@ movement MitisLab_WaterToCypress {
   walk_up
 }
 
+movement MitisLab_ParentsToPlayer {
+  walk_right * 3
+  face_down
+  walk_down * 5
+  face_left
+}
+
+movement MitisLab_ParentsWalkAway {
+  face_down
+  walk_down * 2
+}
+
+movement MitisLab_JakeWalkAway {
+  face_right
+  walk_right
+  face_down
+  walk_down * 3
+}

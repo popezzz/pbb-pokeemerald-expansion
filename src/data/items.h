@@ -16099,6 +16099,24 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    // RORIA ITEMS
+
+    [ITEM_BRONZE_BRICK] =
+    {
+        .name = ITEM_NAME("Bronze Brick"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A special key item\n"
+            "that does something\n"
+            "important."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_BronzeBrick,
+        .iconPalette = gItemIconPalette_BronzeBrick,
+    },
 };
 
 #undef ITEM_NAME

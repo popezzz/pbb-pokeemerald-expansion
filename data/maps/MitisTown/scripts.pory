@@ -171,9 +171,27 @@ script MitisTown_EventScript_Fisherman {
         setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
       default:
         msgbox("Here, let me heal your Pokémon!")
-        //heal mons here.
+        special(HealPlayerParty)
     }
     applymovement(MITIS_TOWN_ID_FISHERMAN, moves(face_left))
+    waitmovement(0)
+    releaseall
+}
+
+script MitisTown_EventScript_EclipseMan {
+    lockall
+    faceplayer
+    msgbox("Mind your own business, we're just\nhangin' out.", MSGBOX_NPC)
+    applymovement(4, moves(face_right))
+    waitmovement(0)
+    releaseall
+}
+
+script MitisTown_EventScript_EclipseWoman {
+    lockall
+    faceplayer
+    msgbox("What are you looking at, kid?", MSGBOX_NPC)
+    applymovement(5, moves(face_left))
     waitmovement(0)
     releaseall
 }

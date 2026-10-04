@@ -22,7 +22,7 @@ script MitisTown_JakesHouse_1F_EventScript_JakeDad {
 text MitisTown_JakesHouse_1F_JakeMomDialogue {
   "Hey {PLAYER}!\p"
   "Jake's so excited to embark on his\nfirst adventure!\p"
-  "I remember him talking about the\nthing's he'll do with you once\lhe'll get his first Pokémon."
+  "I remember him talking about the\nthings he'll do with you once\lhe'll get his first Pokémon."
 }
 
 text MitisTown_JakesHouse_1F_JakeDadDialogue {

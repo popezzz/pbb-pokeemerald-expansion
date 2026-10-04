@@ -1,0 +1,25 @@
+mapscripts MitisTown_PlayersHouse_1F_MapScripts {
+  MAP_SCRIPT_ON_TRANSITION {
+    if(var(VAR_LITTLEROOT_TOWN_STATE) == 3) {
+      clearflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM)
+    }
+    else {
+      setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM)
+    }
+  }
+}
+
+script MitisTown_PlayersHouse_1F_EventScript_Mom {
+  lockall
+  faceplayer
+  msgbox("{SPEAKER NAME_MOM}Don't forget to floss!", MSGBOX_NPC)
+  releaseall
+}
+
+script MitisTown_PlayersHouse_1F_EventScript_Dad {
+  lockall
+  faceplayer
+  msgbox("{SPEAKER NAME_DAD}Good luck, {PLAYER}!\nKeep the Bronze Brick safe.", MSGBOX_NPC)
+  releaseall
+}
+

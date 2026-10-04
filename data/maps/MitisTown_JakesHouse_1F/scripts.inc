@@ -30,7 +30,7 @@ MitisTown_JakesHouse_1F_JakeMomDialogue::
 # 22 "data/maps/MitisTown_JakesHouse_1F/scripts.pory"
 	.string "Hey {PLAYER}!\p"
 	.string "Jake's so excited to embark on his\nfirst adventure!\p"
-	.string "I remember him talking about the\nthing's he'll do with you once\lhe'll get his first Pokémon.$"
+	.string "I remember him talking about the\nthings he'll do with you once\lhe'll get his first Pokémon.$"
 
 MitisTown_JakesHouse_1F_JakeDadDialogue::
 # 28 "data/maps/MitisTown_JakesHouse_1F/scripts.pory"

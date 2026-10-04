@@ -265,6 +265,8 @@ MitisTown_EventScript_Fisherman::
 	case 1, MitisTown_EventScript_Fisherman_4
 # 173 "data/maps/MitisTown/scripts.pory"
 	msgbox MitisTown_EventScript_Fisherman_Text_2
+# 174 "data/maps/MitisTown/scripts.pory"
+	special HealPlayerParty
 MitisTown_EventScript_Fisherman_1:
 # 176 "data/maps/MitisTown/scripts.pory"
 	applymovement MITIS_TOWN_ID_FISHERMAN, MitisTown_EventScript_Fisherman_Movement_0
@@ -291,201 +293,233 @@ MitisTown_EventScript_Fisherman_4:
 	goto MitisTown_EventScript_Fisherman_1
 
 
-# 236 "data/maps/MitisTown/scripts.pory"
-Mitis_FaceRight:
-# 237 "data/maps/MitisTown/scripts.pory"
-	face_right
-	step_end
+MitisTown_EventScript_EclipseMan::
+# 182 "data/maps/MitisTown/scripts.pory"
+	lockall
+# 183 "data/maps/MitisTown/scripts.pory"
+	faceplayer
+# 184 "data/maps/MitisTown/scripts.pory"
+	msgbox MitisTown_EventScript_EclipseMan_Text_0, MSGBOX_NPC
+# 185 "data/maps/MitisTown/scripts.pory"
+	applymovement 4, MitisTown_EventScript_Scientist_Movement_0
+# 186 "data/maps/MitisTown/scripts.pory"
+	waitmovement 0
+# 187 "data/maps/MitisTown/scripts.pory"
+	releaseall
+	return
 
-# 240 "data/maps/MitisTown/scripts.pory"
-Mitis_FaceLeft:
-# 241 "data/maps/MitisTown/scripts.pory"
-	face_left
-	step_end
 
-# 244 "data/maps/MitisTown/scripts.pory"
-Mitis_WalkUp:
-# 245 "data/maps/MitisTown/scripts.pory"
-	walk_up
-	step_end
+MitisTown_EventScript_EclipseWoman::
+# 191 "data/maps/MitisTown/scripts.pory"
+	lockall
+# 192 "data/maps/MitisTown/scripts.pory"
+	faceplayer
+# 193 "data/maps/MitisTown/scripts.pory"
+	msgbox MitisTown_EventScript_EclipseWoman_Text_0, MSGBOX_NPC
+# 194 "data/maps/MitisTown/scripts.pory"
+	applymovement 5, MitisTown_EventScript_Fisherman_Movement_0
+# 195 "data/maps/MitisTown/scripts.pory"
+	waitmovement 0
+# 196 "data/maps/MitisTown/scripts.pory"
+	releaseall
+	return
 
-# 248 "data/maps/MitisTown/scripts.pory"
-Jake_Intro_ToPlayer:
-# 249 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 249 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 249 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 249 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 249 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 249 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 250 "data/maps/MitisTown/scripts.pory"
-	face_right
-# 251 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 251 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 251 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 251 "data/maps/MitisTown/scripts.pory"
-	walk_right
-	step_end
 
 # 254 "data/maps/MitisTown/scripts.pory"
-Jake_Intro_ToLab:
+Mitis_FaceRight:
 # 255 "data/maps/MitisTown/scripts.pory"
-	face_left
-# 256 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 256 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 256 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 256 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 257 "data/maps/MitisTown/scripts.pory"
-	face_up
-# 258 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 258 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 258 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 258 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 258 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 258 "data/maps/MitisTown/scripts.pory"
-	walk_up
+	face_right
 	step_end
 
-# 261 "data/maps/MitisTown/scripts.pory"
-Mitis_WalkToParents_1:
+# 258 "data/maps/MitisTown/scripts.pory"
+Mitis_FaceLeft:
+# 259 "data/maps/MitisTown/scripts.pory"
+	face_left
+	step_end
+
 # 262 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 262 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 262 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 262 "data/maps/MitisTown/scripts.pory"
-	walk_up
+Mitis_WalkUp:
 # 263 "data/maps/MitisTown/scripts.pory"
-	face_left
-# 264 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 264 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 265 "data/maps/MitisTown/scripts.pory"
-	face_up
+	walk_up
 	step_end
 
+# 266 "data/maps/MitisTown/scripts.pory"
+Jake_Intro_ToPlayer:
+# 267 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 267 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 267 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 267 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 267 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 267 "data/maps/MitisTown/scripts.pory"
+	walk_down
 # 268 "data/maps/MitisTown/scripts.pory"
-Mitis_WalkToParents_2:
+	face_right
 # 269 "data/maps/MitisTown/scripts.pory"
-	walk_up
+	walk_right
 # 269 "data/maps/MitisTown/scripts.pory"
-	walk_up
+	walk_right
 # 269 "data/maps/MitisTown/scripts.pory"
-	walk_up
+	walk_right
 # 269 "data/maps/MitisTown/scripts.pory"
-	walk_up
-# 270 "data/maps/MitisTown/scripts.pory"
-	face_left
-# 271 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 271 "data/maps/MitisTown/scripts.pory"
-	walk_left
-# 271 "data/maps/MitisTown/scripts.pory"
-	walk_left
+	walk_right
+	step_end
+
 # 272 "data/maps/MitisTown/scripts.pory"
+Jake_Intro_ToLab:
+# 273 "data/maps/MitisTown/scripts.pory"
+	face_left
+# 274 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 274 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 274 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 274 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 275 "data/maps/MitisTown/scripts.pory"
+	face_up
+# 276 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 276 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 276 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 276 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 276 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 276 "data/maps/MitisTown/scripts.pory"
+	walk_up
+	step_end
+
+# 279 "data/maps/MitisTown/scripts.pory"
+Mitis_WalkToParents_1:
+# 280 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 280 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 280 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 280 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 281 "data/maps/MitisTown/scripts.pory"
+	face_left
+# 282 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 282 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 283 "data/maps/MitisTown/scripts.pory"
 	face_up
 	step_end
 
-# 275 "data/maps/MitisTown/scripts.pory"
-Mitis_ParentsSurprised:
-# 276 "data/maps/MitisTown/scripts.pory"
-	face_down
-# 277 "data/maps/MitisTown/scripts.pory"
-	emote_exclamation_mark
-# 278 "data/maps/MitisTown/scripts.pory"
-	delay_16
-# 279 "data/maps/MitisTown/scripts.pory"
-	delay_16
-	step_end
-
-# 282 "data/maps/MitisTown/scripts.pory"
-Mitis_MomWalkAway:
-# 283 "data/maps/MitisTown/scripts.pory"
-	face_right
-# 284 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 284 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 285 "data/maps/MitisTown/scripts.pory"
-	face_down
 # 286 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 286 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 286 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 286 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 286 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 286 "data/maps/MitisTown/scripts.pory"
-	walk_down
-	step_end
-
-# 289 "data/maps/MitisTown/scripts.pory"
-Mitis_DadWalkAway:
-# 290 "data/maps/MitisTown/scripts.pory"
-	face_right
-# 291 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 291 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 291 "data/maps/MitisTown/scripts.pory"
-	walk_right
-# 292 "data/maps/MitisTown/scripts.pory"
-	face_down
-# 293 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 293 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 293 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 293 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 293 "data/maps/MitisTown/scripts.pory"
-	walk_down
-# 293 "data/maps/MitisTown/scripts.pory"
-	walk_down
-	step_end
-
-# 296 "data/maps/MitisTown/scripts.pory"
-Mitis_WalkAway:
-# 297 "data/maps/MitisTown/scripts.pory"
-	face_down
-# 298 "data/maps/MitisTown/scripts.pory"
-	walk_down
-	step_end
-
-# 301 "data/maps/MitisTown/scripts.pory"
-Mitis_SpecialTrigger_Fisherman:
-# 302 "data/maps/MitisTown/scripts.pory"
+Mitis_WalkToParents_2:
+# 287 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 287 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 287 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 287 "data/maps/MitisTown/scripts.pory"
+	walk_up
+# 288 "data/maps/MitisTown/scripts.pory"
 	face_left
-# 303 "data/maps/MitisTown/scripts.pory"
+# 289 "data/maps/MitisTown/scripts.pory"
 	walk_left
-# 304 "data/maps/MitisTown/scripts.pory"
+# 289 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 289 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 290 "data/maps/MitisTown/scripts.pory"
+	face_up
+	step_end
+
+# 293 "data/maps/MitisTown/scripts.pory"
+Mitis_ParentsSurprised:
+# 294 "data/maps/MitisTown/scripts.pory"
 	face_down
-# 305 "data/maps/MitisTown/scripts.pory"
+# 295 "data/maps/MitisTown/scripts.pory"
+	emote_exclamation_mark
+# 296 "data/maps/MitisTown/scripts.pory"
+	delay_16
+# 297 "data/maps/MitisTown/scripts.pory"
+	delay_16
+	step_end
+
+# 300 "data/maps/MitisTown/scripts.pory"
+Mitis_MomWalkAway:
+# 301 "data/maps/MitisTown/scripts.pory"
+	face_right
+# 302 "data/maps/MitisTown/scripts.pory"
+	walk_right
+# 302 "data/maps/MitisTown/scripts.pory"
+	walk_right
+# 303 "data/maps/MitisTown/scripts.pory"
+	face_down
+# 304 "data/maps/MitisTown/scripts.pory"
 	walk_down
-# 306 "data/maps/MitisTown/scripts.pory"
+# 304 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 304 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 304 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 304 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 304 "data/maps/MitisTown/scripts.pory"
+	walk_down
+	step_end
+
+# 307 "data/maps/MitisTown/scripts.pory"
+Mitis_DadWalkAway:
+# 308 "data/maps/MitisTown/scripts.pory"
+	face_right
+# 309 "data/maps/MitisTown/scripts.pory"
+	walk_right
+# 309 "data/maps/MitisTown/scripts.pory"
+	walk_right
+# 309 "data/maps/MitisTown/scripts.pory"
+	walk_right
+# 310 "data/maps/MitisTown/scripts.pory"
+	face_down
+# 311 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 311 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 311 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 311 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 311 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 311 "data/maps/MitisTown/scripts.pory"
+	walk_down
+	step_end
+
+# 314 "data/maps/MitisTown/scripts.pory"
+Mitis_WalkAway:
+# 315 "data/maps/MitisTown/scripts.pory"
+	face_down
+# 316 "data/maps/MitisTown/scripts.pory"
+	walk_down
+	step_end
+
+# 319 "data/maps/MitisTown/scripts.pory"
+Mitis_SpecialTrigger_Fisherman:
+# 320 "data/maps/MitisTown/scripts.pory"
+	face_left
+# 321 "data/maps/MitisTown/scripts.pory"
+	walk_left
+# 322 "data/maps/MitisTown/scripts.pory"
+	face_down
+# 323 "data/maps/MitisTown/scripts.pory"
+	walk_down
+# 324 "data/maps/MitisTown/scripts.pory"
 	face_right
 	step_end
 
@@ -541,18 +575,26 @@ MitisTown_EventScript_Fisherman_Text_2:
 # 173 "data/maps/MitisTown/scripts.pory"
 	.string "Here, let me heal your Pokémon!$"
 
+MitisTown_EventScript_EclipseMan_Text_0:
+# 184 "data/maps/MitisTown/scripts.pory"
+	.string "Mind your own business, we're just\nhangin' out.$"
+
+MitisTown_EventScript_EclipseWoman_Text_0:
+# 193 "data/maps/MitisTown/scripts.pory"
+	.string "What are you looking at, kid?$"
+
 MitisTownSign::
-# 183 "data/maps/MitisTown/scripts.pory"
+# 201 "data/maps/MitisTown/scripts.pory"
 	.string "Mitis Town.\n"
 	.string "The fresh breeze of a new start.$"
 
 MitisTown_JakeDialogue::
-# 188 "data/maps/MitisTown/scripts.pory"
+# 206 "data/maps/MitisTown/scripts.pory"
 	.string "I can't believe the day has come!\nWe'll finally get our first Pokémon!\p"
 	.string "I saw your parents go to the digging site.\nYou should go check them.\lI'll wait for you at the lab!$"
 
 MitisTown_ParentsDialogue1::
-# 193 "data/maps/MitisTown/scripts.pory"
+# 211 "data/maps/MitisTown/scripts.pory"
 	.string "{SPEAKER NAME_MOM}Well that ought to take care of it...\p"
 	.string "{SPEAKER NAME_DAD}We have to keep this a secret, for\neveryone's safety.\p"
 	.string "{SPEAKER NAME_MOM}You're right.\pIt's too dangerous for anyone to go\ndown there.\p"
@@ -561,7 +603,7 @@ MitisTown_ParentsDialogue1::
 	.string "{SPEAKER NAME_DAD}Maybe you're right.$"
 
 MitisTown_ParentsDialogue2::
-# 202 "data/maps/MitisTown/scripts.pory"
+# 220 "data/maps/MitisTown/scripts.pory"
 	.string "{SPEAKER NAME_MOM}{PLAYER}! You startled us!\p"
 	.string "{SPEAKER NAME_DAD}Hey champ!\pToday is the day you get your first\nPokémon!\p"
 	.string "{SPEAKER NAME_MOM}We are so happy for you, sweetie!\p"
@@ -571,23 +613,23 @@ MitisTown_ParentsDialogue2::
 	.string "{SPEAKER NAME_DAD}We'll see you there!$"
 
 MitisTown_ScientistDialogue::
-# 212 "data/maps/MitisTown/scripts.pory"
+# 230 "data/maps/MitisTown/scripts.pory"
 	.string "At the end of the road lies Roria's\nPokémon research lab.\p"
 	.string "Years of studies on Pokémon are\nstored and mantained there.$"
 
 MitisTown_TechBoyDialogue::
-# 217 "data/maps/MitisTown/scripts.pory"
+# 235 "data/maps/MitisTown/scripts.pory"
 	.string "Technology is amazing!\p"
 	.string "People can easily make their own\ngames using decomps!$"
 
 MitisTown_CamperDialogue::
-# 222 "data/maps/MitisTown/scripts.pory"
+# 240 "data/maps/MitisTown/scripts.pory"
 	.string "I'm not a good swimmer.\n"
 	.string "Matter of fact, I'm scared of water.\p"
 	.string "People sometimes use Pokémon to\ntravel on water.\p"
 	.string "I wonder if that'll help me\nfight my fear of water...$"
 
 MitisTown_PokeballDialogue::
-# 229 "data/maps/MitisTown/scripts.pory"
+# 247 "data/maps/MitisTown/scripts.pory"
 	.string "Some Pokéballs are better\nthan others.\p"
 	.string "Some work better on certain Pokémon\nwhile others work better in\lspecific places.$"
