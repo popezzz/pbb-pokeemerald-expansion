@@ -1,0 +1,82 @@
+mapscripts Route1_Roria_MapScripts {
+}
+
+script Route1_Trainer_Ralph {
+    trainerbattle_single(TRAINER_ROUTE_1_RALPH, Route1_Text_RalphIntro, Route1_Text_RalphDefeat)
+    goto_if_defeated(TRAINER_ROUTE_1_RALPH, Route1_EventScript_RalphPostBattle)
+    end
+}
+
+script Route1_EventScript_RalphPostBattle {
+    lockall
+    msgbox("You're pretty strong!\nWant a rematch?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, Route1_EventScript_RalphRematch)
+    release
+}
+
+script Route1_EventScript_RalphRematch {
+    trainerbattle_no_intro(TRAINER_ROUTE_1_RALPH, Route1_Text_RalphDefeat)
+    release
+}
+
+text Route1_Text_RalphIntro {
+  "I'll battle you with the bug type\n"
+  "Pokémon I just caught."
+}
+
+text Route1_Text_RalphDefeat {
+  "Maybe bug type Pokémon are not the\n"
+  "strongest..."
+}
+
+script Route1_Trainer_Jack {
+    trainerbattle_single(TRAINER_ROUTE_1_JACK, Route1_Text_JackIntro, Route1_Text_JackDefeat)
+    goto_if_defeated(TRAINER_ROUTE_1_JACK, Route1_EventScript_JackPostBattle)
+    end
+}
+
+script Route1_EventScript_JackPostBattle {
+    lockall
+    msgbox("You're pretty strong!\nWant a rematch?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, Route1_EventScript_JackRematch)
+    release
+}
+
+script Route1_EventScript_JackRematch {
+    trainerbattle_no_intro(TRAINER_ROUTE_1_JACK, Route1_Text_JackDefeat)
+    release
+}
+
+text Route1_Text_JackIntro {
+  "Let's battle!"
+}
+
+text Route1_Text_JackDefeat {
+  "I need to train my Pokémon more."
+}
+
+script Route1_Trainer_Susie {
+    trainerbattle_single(TRAINER_ROUTE_1_SUSIE, Route1_Text_SusieIntro, Route1_Text_SusieDefeat)
+    goto_if_defeated(TRAINER_ROUTE_1_SUSIE, Route1_EventScript_SusiePostBattle)
+    end
+}
+
+script Route1_EventScript_SusiePostBattle {
+    lockall
+    msgbox("You're pretty strong!\nWant a rematch?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, Route1_EventScript_SusieRematch)
+    release
+}
+
+script Route1_EventScript_SusieRematch {
+    trainerbattle_no_intro(TRAINER_ROUTE_1_SUSIE, Route1_Text_SusieDefeat)
+    release
+}
+
+text Route1_Text_SusieIntro {
+  "My Pokémon are so cute!"
+}
+
+text Route1_Text_SusieDefeat {
+  "My cute little Pokémon!"
+}

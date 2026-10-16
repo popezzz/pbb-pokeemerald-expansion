@@ -5513,7 +5513,7 @@
       "blockdata_filepath": "data/layouts/Route1_Frlg/map.bin",
       "border_height": 2,
       "border_width": 2,
-      "layout_version": "frlg"
+      "layout_version": "emerald"
     },
     {
       "id": "LAYOUT_ROUTE2",
@@ -9409,6 +9409,19 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/MitisTown_House1/border.bin",
       "blockdata_filepath": "data/layouts/MitisTown_House1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE1_RORIA",
+      "name": "Route1_Roria_Layout",
+      "width": 40,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route1_Roria/border.bin",
+      "blockdata_filepath": "data/layouts/Route1_Roria/map.bin",
+      "border_height": 2,
+      "border_width": 2,
       "layout_version": "emerald"
     }
   ]

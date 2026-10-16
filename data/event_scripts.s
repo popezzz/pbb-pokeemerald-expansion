@@ -1755,4 +1755,4 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/MitisTown_House1/scripts.inc"
 
-	.include "data/maps/Route1/scripts.inc"
+	.include "data/maps/Route1_Roria/scripts.inc"
