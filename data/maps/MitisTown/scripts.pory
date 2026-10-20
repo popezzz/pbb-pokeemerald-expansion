@@ -167,11 +167,14 @@ script MitisTown_EventScript_Fisherman {
         applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkUp)
       case 1:
         msgbox("Good luck on your Journey!\pIf you need help, talk to me.\nI'll heal your Pokémon!", MSGBOX_AUTOCLOSE)
+        setrespawn(HEAL_LOCATION_MITIS_TOWN)
         applymovement(OBJ_EVENT_ID_PLAYER, Mitis_WalkAway)
         setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
       default:
         msgbox("Here, let me heal your Pokémon!")
         special(HealPlayerParty)
+        msgbox("Take care, {PLAYER}.\nCome back if you need help.")
+        setrespawn(HEAL_LOCATION_MITIS_TOWN)
     }
     applymovement(MITIS_TOWN_ID_FISHERMAN, moves(face_left))
     waitmovement(0)
